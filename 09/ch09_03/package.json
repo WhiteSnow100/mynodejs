@@ -1,6 +1,7 @@
 {
-  "name": "ch08_02",
+  "name": "ch09_03",
   "version": "1.0.0",
+  "description": "몽고디비 사용하는 게시판",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -8,13 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "express": "^4.21.1",
-    "multer": "^1.4.5-lts.1",
-    "nodemon": "^3.1.7",
-    "sequelize": "^6.37.5",
-    "sequelize-cli": "^6.6.2",
-    "sqlite3": "^5.1.7"
+    "mongoose": "^8.8.0",
+    "nodemon": "^3.1.7"
   }
 }

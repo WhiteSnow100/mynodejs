@@ -15,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         content: DataTypes.STRING,  // allowNull true가 기본
-        author: DataTypes.STRING
+        author: DataTypes.STRING,
+        filename: {  // 2024.1104 마이그레이션으로 테이블에 칼럼추가후 수정내용
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     });
     Post.associate = function(models) {
         Post.hasMany(models.Comment)
