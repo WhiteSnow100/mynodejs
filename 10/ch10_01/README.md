@@ -19,3 +19,5 @@ create table users (
     name varchar,
     address varchar 
 )
+
+레이어드 아키텍쳐

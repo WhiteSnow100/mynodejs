@@ -3,6 +3,8 @@ const fs = require("fs");
 const path = require("path");
 // import router from toutes
 const userRoute = require('./routes/userRoute');
+const postRoute = require('./routes/postRoute');
+const authRoute = require('./routes/authRoute');
 
 const models = require(`./models`); // models/index.js 호출
 // models <= db
@@ -13,8 +15,8 @@ app.use(express.json());
 
 // use router
 app.use('/users', userRoute);  // userRoute는 /users와 맵핑
-// app.use('/posts', postRoute);  
-// app.use('/products', productRoute); 
+app.use('/posts', postRoute);  // postRoute는 /posts와 맵핑
+app.use('/auth', authRoute);  // 
 
 app.listen(PORT, () => {
     console.log(`server is running on ${PORT}`);
