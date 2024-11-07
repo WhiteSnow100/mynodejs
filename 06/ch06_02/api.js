@@ -5,8 +5,8 @@ const path = require("path");
 const exp = require("constants");
 
 // database setting
-const db_name = path.join(__dirname,"post.db"); // sqllite3 database file name
-const db = new sqlite3.Database(db_name);  // db. 으로 사용 (db.exec() )
+const db_name = path.join(__dirname,"post.db"); // sqllite3 database file name --> dao
+const db = new sqlite3.Database(db_name);  // db. 으로 사용 (db.exec() )  --> dao
 
 const create_sql = `
     create table if not exists posts(
@@ -28,22 +28,22 @@ db.serialize(() => {  //
 
 const app = express();
 const PORT = 3000;
-app.use(express.json());
+app.use(express.json());  //middleware 사용 
 
 // add route
 // post /posts : create
 // insert : postman - post로 data insert
-app.post(`/posts`, (req,res) => {
-    const { title, content, author } = req.body;
-    let sql = ` insert into posts(title, content, author) values(?, ?, ?) `;
+app.post(`/posts`, (req,res) => {  // route : route.post , (req,res) : controller의 매개변수  --> route, controller
+    const { title, content, author } = req.body;  // --> controller
+    let sql = ` insert into posts(title, content, author) values(?, ?, ?) `; // -->dao
 
     // db.run : insert, update, delete 할때 사용
-    db.run(sql, [title, content, author], function (err) {
+    db.run(sql, [title, content, author], function (err) {  // --> dao
         if(err) {
-            res.status(500).json({error: err.message});
+            res.status(500).json({error: err.message});  // --> controller
         }
         console.log(`row id: ${JSON.stringify(this)}`);
-        res.status(201).json({result: 'success', id: this.lastID});
+        res.status(201).json({result: 'success', id: this.lastID}); // --> controller
     });
 });
 
@@ -62,13 +62,13 @@ app.get(`/posts`, (req, res) => {
         if (err) {
             res.status(500).json({error: err.message});
         }
-        let total_sql = ` select count(1) as total_count from posts `
+        let total_sql = ` select count(1) as total_count from posts `  // --> dao 
         db.get(total_sql, (err1, row) => {
             if(err1) {
                 res.status(500).json({error:err1.message});
             }
-            const total = row.total_count;  // total:13, limit:5
-            const totalPages = Math.ceil(total / limit); // 3
+            const total = row.total_count;  // total:13, limit:5  --> service
+            const totalPages = Math.ceil(total / limit); // 3  --> service
             res.status(200).json({items: rows, currentPage: page, totalPages: totalPages});
         });
     });
@@ -122,6 +122,6 @@ app.delete('/posts/:id', (req,res) => {
     });
 });
 
-app.listen(PORT);
+app.listen(PORT);  // port번호의 서버 띄우기
 
 

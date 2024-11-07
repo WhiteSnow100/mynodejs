@@ -1,11 +1,12 @@
 {
-  "name": "ch12_01",
+  "name": "ch12_02",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "concurrently": "^9.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -13,7 +14,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "server": "node server/index.js",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server":"node server/index.js",
     "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
